@@ -1,0 +1,85 @@
+.selection-section {
+    background-color: #000000;
+    padding: 50px 0;
+  }
+  
+  .title {
+    color: #f58605;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .description {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .menu-items {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  
+  .menu-item {
+    color: #ffffff;
+    cursor: pointer;
+    margin: 0 15px;
+    position: relative;
+  }
+  
+  .menu-item:hover {
+    color: #f58605;
+  }
+  
+  .menu-item::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: #f58605;
+    opacity: 0;
+    transition: all 0.3s;
+  }
+  
+  .menu-item:hover::after {
+    width: 100%;
+    opacity: 1;
+  }
+  
+  .coffee-cards {
+    margin-top: 20px; /* Ajouter une marge en haut pour espacer les cartes de café, thé, shake et bubble tea */
+  }
+  
+  .coffee-card {
+    background-color: #1d1d1d !important;
+    border: none;
+    margin-bottom: 30px;
+  }
+  
+  .coffee-card-footer {
+    display: flex;
+    justify-content: space-between;
+    background-color: #1d1d1d;
+  }
+  
+  .coffee-name {
+    color: #f58605;
+  }
+  
+  .coffee-price {
+    color: #ffffff;
+  }
+
+  .separator {
+    width: 20px;
+    height: 3px;
+    background-color: #ffffff;
+    margin: 50px auto;
+  }
+  
+  

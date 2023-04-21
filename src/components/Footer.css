@@ -1,0 +1,30 @@
+.footer {
+    background-color: #000000;
+    padding: 50px 0;
+    color: white;
+  }
+  
+  .footer-title {
+    color: #f58605;
+    margin-bottom: 20px;
+  }
+  
+  .footer-text {
+    margin-bottom: 20px;
+  }
+  
+  .footer-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .footer-list li {
+    margin-bottom: 10px;
+  }
+  
+  .footer-email {
+    margin-bottom: 20px;
+  }
+  
+  /* Ajoutez les styles pour les icônes de médias sociaux ici */
+  

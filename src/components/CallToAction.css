@@ -1,0 +1,19 @@
+.call-to-action {
+    background-color: #e5e5e5;
+    color: #f58605;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .cta-text {
+    margin-bottom: 20px;
+  }
+  
+  .cta-button {
+    background-color: #e5e5e5 !important;
+    border-color: #f58605 !important;
+    color: #f58605 !important;
+  }
+  

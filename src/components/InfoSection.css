@@ -1,0 +1,86 @@
+.info-section {
+    background-color: #000000;
+    padding: 50px 0;
+  }
+  
+  .info-cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0; /* Marge par défaut pour les petits écrans */
+    margin-right: 0;
+  }
+  
+  @media (min-width: 768px) {
+    .info-cards {
+      margin-left: 30px; /* Marge pour les écrans md et supérieurs */
+    }
+  }
+  
+  .info-card {
+    background-color: #1d1d1d !important;
+    border: 1px solid white !important;
+    border-radius: 5px;
+    margin-bottom: 115px; /* Ajustez cette valeur pour espacer les cadres entre eux */
+  }
+  
+  .card-title {
+    color: #F58605;
+    margin-bottom: 10px;
+  }
+  
+  .card-text {
+    color: white;
+  }
+  
+  .first-card {
+    margin-top: 50px;
+  }
+  
+  .info-button {
+    background-color: #f58605 !important;
+    border-color: #f58605 !important;
+    color: white;
+    align-self: flex-start;
+    margin-top: 115px; /* valeur pour espacer le bouton des cadres */
+  }
+  
+  .image-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0px;
+  }
+  
+  .info-image {
+    width: 100%;
+    max-width: 699px;
+    max-height: 1050px;
+    object-fit: cover;
+  }
+  
+  
+  
+  @media (max-width: 767px) {
+    .info-button {
+      margin-top: 20px; /*valeur pour l'espacement entre le bouton et le dernier cadre sur les petits écrans */
+      margin-bottom: 40px; /*valeur pour l'espacement entre le bouton et la photo sur les petits écrans */
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 991px) {
+    .info-card {
+      height: calc(100% / 4); /* Divisez la hauteur disponible entre les cartes */
+    }
+  
+    .info-button {
+      margin-top: 0px; /*valeur pour l'espacement entre le bouton et le dernier cadre sur les écrans md et supérieurs */
+      margin-bottom: 30px; /*valeur pour l'espacement entre le bouton et la photo sur les écrans md et supérieurs */
+    }
+    
+    .image-col {
+      padding-top: 50px; /*valeur pour l'espacement entre le haut de la photo et le haut du cadre sur les écrans md et supérieurs */
+      padding-bottom: 50px;
+    }
+  }
+  

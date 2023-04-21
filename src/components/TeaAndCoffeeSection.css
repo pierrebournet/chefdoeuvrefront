@@ -1,0 +1,17 @@
+.tea-and-coffee-section {
+    background-color: black;
+    color: white;
+    padding: 50px;
+    text-align: center;
+    
+  }
+  
+  .tea-and-coffee-title {
+    color: orange;
+  }
+  
+  .tea-and-coffee-description {
+    font-size: 20px;
+    line-height: 1.5;
+  }
+  
