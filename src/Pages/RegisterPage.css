@@ -1,0 +1,15 @@
+.registerpage-container {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .registerpage-title {
+    color: #F58605;
+  }
+  

@@ -1,0 +1,25 @@
+.register-container {
+    background-color: black;
+    color: #F58605;
+    padding: 2rem;
+    max-width: 400px;
+    margin: auto;
+    border-radius: 8px;
+  }
+  
+  .register-button {
+    background-color: #6B4F33 !important;
+    color: white !important;
+    border: 1px solid #6B4C35 !important;
+    transition: background-color 0.3s !important;
+  }
+  
+  .register-button:hover {
+    background-color: white !important;
+    color: black !important;
+  }
+  
+  .password-hint {
+    color: white;
+  }
+  

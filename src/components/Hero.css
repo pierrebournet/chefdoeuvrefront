@@ -36,5 +36,12 @@
     background-color: #8B4513;
     border-color: #8B4513;
   }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  
   
   

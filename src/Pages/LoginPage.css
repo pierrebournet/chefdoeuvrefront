@@ -1,0 +1,39 @@
+.loginpage-container {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginpage-title {
+    color: #F58605;
+}
+
+.login-container {
+    background-color: black;
+    color: #F58605;
+    padding: 2rem;
+    max-width: 400px;
+    margin: auto;
+    border-radius: 8px;
+}
+
+.login-button {
+    background-color: #6B4F33 !important;
+    color: white !important;
+    border: 1;
+    border-color: #6B4F33 !important
+}
+
+.password-form-group {
+    margin-bottom: 1rem; /* Ajoutez une marge en bas */
+}
+
+.login-button,
+.register-button {
+    margin-top: 1rem; /* Ajoutez une marge en haut */
+}

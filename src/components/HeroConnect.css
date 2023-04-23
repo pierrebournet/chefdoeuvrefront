@@ -1,0 +1,40 @@
+.hero-connect {
+    background-image: url(../../public/cafe.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative; 
+  }
+  
+  .hero-connect h1,
+  .hero-connect p {
+    color: white;
+  }
+  
+  .logout-button {
+    background-color: #6B4F33 !important;
+    border-color: #6B4F33 !important;
+    color: white;
+    transition: background-color 0.3s;
+    position: absolute; 
+    top: 10px; 
+    right: 10px; 
+  }
+  
+  .logout-button:hover {
+    background-color: white;
+    border-color: #6B4F33;
+    color: #6B4F33;
+  }
+
+  .logout-button:active {
+    background-color: white;
+    border-color: #6B4F33;
+    color: #6B4F33;
+  }
+  

@@ -1,6 +1,6 @@
 .call-to-action {
     background-color: #e5e5e5;
-    color: #f58605;
+    color: #f58605 !important;
     padding: 50px;
     display: flex;
     flex-direction: column;
@@ -15,5 +15,15 @@
     background-color: #e5e5e5 !important;
     border-color: #f58605 !important;
     color: #f58605 !important;
+  }
+  
+  .create-account-button {
+    color: #F58605 !important;
+    border-color: #F58605 !important;
+  }
+  
+  .create-account-button:hover {
+    background-color: #F58605 !important;
+    color: white !important;
   }
   
