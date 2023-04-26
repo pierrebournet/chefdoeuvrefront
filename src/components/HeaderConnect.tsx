@@ -1,17 +1,20 @@
-// HeaderConnect.tsx
 import React, { useContext } from 'react';
-import { Navbar, Nav } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import './Header.css';
+import { Navbar, Nav, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import AuthContext from '../contexts/AuthContext';
-
+import './HeaderConnect.css'
 const HeaderConnect: React.FC = () => {
-  const { user } = useContext(AuthContext);
+  const { isAuthenticated, isAdmin, user, setAuthContextData } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setAuthContextData(false, false, null);
+  };
 
   return (
-    <Navbar bg="light" expand="lg" style={{ backgroundColor: '#C4C4C4' }}>
-      <Navbar.Brand href="#home" className="logo">
-        Logo
+    <Navbar expand="lg" style={{ backgroundColor: '#C4C4C4' }}>
+      <Navbar.Brand as={Link} to="/connect">
+        Coffee & Tea
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
@@ -21,11 +24,34 @@ const HeaderConnect: React.FC = () => {
           <Nav.Link className="nav-item-custom" href="#bubble-tea">Bubble Tea</Nav.Link>
           <Nav.Link className="nav-item-custom" href="#shake">Shake</Nav.Link>
           <Nav.Link className="nav-item-custom" href="#contact">Contact</Nav.Link>
+          <Nav.Link as={Link} to="/connect" className="nav-item-custom">
+            Accueil
+          </Nav.Link>
+          {isAdmin && (
+            <Nav.Link as={Link} to="/dashboard" className="nav-item-custom">
+              Dashboard
+            </Nav.Link>
+          )}
+          {isAuthenticated && (
+            <Nav.Link as={Link} to="/cart" className="nav-item-custom">
+              Panier
+            </Nav.Link>
+          )}
         </Nav>
-        <Nav>
-          <Nav.Link>{user?.username}</Nav.Link>
-          <Nav.Link href="#cart">Panier</Nav.Link>
-        </Nav>
+        {isAuthenticated ? (
+          <Button className="headerconnect-logout" onClick={handleLogout}>
+            Se déconnecter
+          </Button>
+        ) : (
+          <Nav>
+            <Nav.Link as={Link} to="/register">
+              S'enregistrer
+            </Nav.Link>
+            <Nav.Link as={Link} to="/login">
+              Login
+            </Nav.Link>
+          </Nav>
+        )}
       </Navbar.Collapse>
     </Navbar>
   );

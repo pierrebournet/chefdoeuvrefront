@@ -1,20 +1,16 @@
 import { createContext } from 'react';
+import { User } from '../types/User';
 
-export interface User {
-  id: number;
-  username: string;
-  email: string;
-  isAdmin: boolean; // Ajoutez cette ligne
-}
-
-export interface AuthContextData {
+export type AuthContextData = {
   isAuthenticated: boolean;
+  isAdmin: boolean;
   user: User | null;
-  setAuthContextData: (isAuthenticated: boolean, user: User | null) => void;
-}
+  setAuthContextData: (isAuthenticated: boolean, isAdmin: boolean, user: User | null) => void;
+};
 
 const AuthContext = createContext<AuthContextData>({
   isAuthenticated: false,
+  isAdmin: false,
   user: null,
   setAuthContextData: () => {},
 });

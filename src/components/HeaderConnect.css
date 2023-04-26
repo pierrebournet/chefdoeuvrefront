@@ -1,0 +1,16 @@
+.headerconnect {
+    background-color: #C4C4C4 !important;
+  }
+  
+  .headerconnect-logout {
+    background-color: #8B4513 !important;
+    border-color: #8B4513 !important;
+    margin-left: auto;
+  }
+  
+  .headerconnect-logout:hover {
+    background-color: white !important;
+    border-color: #8B4513 !important;
+    color: #8B4513 !important;
+  }
+  

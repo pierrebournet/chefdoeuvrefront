@@ -1,43 +1,34 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './App.css';
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from 'react-router-dom';
 import Home from './Pages/Home';
+import Login from './Pages/LoginPage';
+import Register from './Pages/RegisterPage';
+import HomeAdmin from './Pages/HomeAdmin';
 import HomeConnect from './Pages/HomeConnect';
-import LoginPage from './Pages/LoginPage';
-import RegisterPage from './Pages/RegisterPage';
-import { Dashboard } from './components/Dashboard'
-import AuthContext, { AuthContextData, User } from './contexts/AuthContext';
+import DashboardPage from './Pages/DashboardPage';
+import AuthWrapper from './components/AuthWrapper';
+import './App.css';
+import AuthProvider from './components/Authprovider';
 
 function App() {
-  const [authContextData, _setAuthContextData] = useState<AuthContextData>({
-    isAuthenticated: false,
-    user: null,
-    setAuthContextData: () => {},
-  });
-
-  const setAuthContextData = (isAuthenticated: boolean, user: User | null) => {
-    _setAuthContextData({ ...authContextData, isAuthenticated, user, setAuthContextData });
-  };
-
   return (
-    <div className="App">
-      <AuthContext.Provider value={{ ...authContextData, setAuthContextData }}>
-        <Router>
-          <Routes>
-            {authContextData.isAuthenticated ? (
-              <Route path="/" element={<HomeConnect />} />
-            ) : (
-              <Route path="/" element={<Home />} />
-            )}
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            {authContextData.user && authContextData.user.role === 'admin' && (
-              <Route path="/dashboard" element={<Dashboard />} />
-            )}
-          </Routes>
-        </Router>
-      </AuthContext.Provider>
-    </div>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/admin/dashboard" element={<DashboardPage />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/admin" element={<AuthWrapper><HomeAdmin /></AuthWrapper>} />
+          <Route path="/dashboard" element={<AuthWrapper adminRoute><DashboardPage /></AuthWrapper>} />
+          <Route path="/connect" element={<AuthWrapper><HomeConnect /></AuthWrapper>} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 

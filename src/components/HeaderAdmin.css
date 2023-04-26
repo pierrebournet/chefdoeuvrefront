@@ -1,0 +1,13 @@
+.headeradmin-dashboard,
+.headeradmin-logout {
+  background-color: #8B4513 !important;
+  border-color: #8B4513 !important;
+  margin-left: 1rem;
+}
+
+.headeradmin-dashboard:hover,
+.headeradmin-logout:hover {
+  background-color: white !important;
+  border-color: #8B4513 !important;
+  color: #8B4513 !important;
+}

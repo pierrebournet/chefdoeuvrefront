@@ -1,11 +1,16 @@
 import React, { useContext } from 'react';
-import { Navbar, Nav } from 'react-bootstrap';
+import { Navbar, Nav, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import './Header.css';
 import AuthContext from '../contexts/AuthContext';
+import './HeaderAdmin.css';
 
-const Header: React.FC = () => {
-  const { isAuthenticated, user } = useContext(AuthContext);
+const HeaderAdmin: React.FC = () => {
+  const { isAuthenticated, isAdmin, user, setAuthContextData } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setAuthContextData(false, false, null);
+  };
 
   return (
     <Navbar bg="light" expand="lg" style={{ backgroundColor: '#C4C4C4' }}>
@@ -20,25 +25,18 @@ const Header: React.FC = () => {
           <Nav.Link className="nav-item-custom" href="#bubble-tea">Bubble Tea</Nav.Link>
           <Nav.Link className="nav-item-custom" href="#shake">Shake</Nav.Link>
           <Nav.Link className="nav-item-custom" href="#contact">Contact</Nav.Link>
+          <Nav.Link href="#home" className="nav-item-custom">
+            Accueil
+          </Nav.Link>
         </Nav>
         <Nav>
-          {isAuthenticated ? (
+          {isAuthenticated && isAdmin && (
             <>
               <Nav.Link>{user?.username}</Nav.Link>
-              <Nav.Link href="#cart">Panier</Nav.Link>
-            </>
-          ) : (
-            <>
-              <LinkContainer to="/register">
-                <Nav.Link className="register-button">
-                  S'enregistrer
-                </Nav.Link>
+              <LinkContainer to="/admin/dashboard">
+                <Button className="headeradmin-dashboard">Dashboard</Button>
               </LinkContainer>
-              <LinkContainer to="/login">
-                <Nav.Link className="login-button">
-                  Login
-                </Nav.Link>
-              </LinkContainer>
+              <Button onClick={handleLogout} className="headeradmin-logout">Se déconnecter</Button>
             </>
           )}
         </Nav>
@@ -47,4 +45,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default HeaderAdmin;

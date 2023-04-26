@@ -25,14 +25,17 @@ const LoginPage: React.FC = () => {
         const data = await response.json();
         console.log('Utilisateur connecté:', data);
 
-        localStorage.setItem('token', data.token);
+        localStorage.setItem('token', data.access_token);
 
-        setAuthContextData(true, data.user);
+        console.log(data);
+        ;
+        setAuthContextData(true, data.isAdmin, data);
 
-        if (data.user.isAdmin) {
-          navigate('/dashboard'); // Redirigez l'administrateur vers la page du tableau de bord
+
+        if (data.isAdmin) {
+          navigate('/admin'); 
         } else {
-          navigate('/'); // Redirigez l'utilisateur vers la page d'accueil
+          navigate('/connect'); // Redirigez l'utilisateur vers la page HomeConnect
         }
       } else {
         console.error('Erreur lors de la connexion:', response);
@@ -46,6 +49,7 @@ const LoginPage: React.FC = () => {
   };
 
   return (
+    
     <div className="loginpage-container" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/images/registerlogin.jpg)` }}>
       <h1 className="loginpage-title">Connexion</h1>
       <Form className="login-container" onSubmit={handleSubmit}>

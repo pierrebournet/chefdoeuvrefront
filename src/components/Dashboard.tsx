@@ -17,7 +17,7 @@ export const Dashboard: React.FC = () => {
   };
 
   const fetchCategories = async () => {
-    const response = await fetch('http://localhost:3000/categories');
+    const response = await fetch('http://localhost:3000/category');
     const data = await response.json();
     setCategories(data);
   };
@@ -61,4 +61,4 @@ export const Dashboard: React.FC = () => {
       </Row>
     </Container>
   );
-              }
+};

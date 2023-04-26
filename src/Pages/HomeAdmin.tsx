@@ -1,17 +1,17 @@
 import React from 'react';
-import HeaderConnect from '../components/HeaderConnect';
-import Hero from '../components/Hero';
+import HeaderAdmin from '../components/HeaderAdmin';
 import TeaAndCoffeeSection from '../components/TeaAndCoffeeSection';
 import InfoSection from '../components/InfoSection';
 import SelectionSection from '../components/SelectionSection';
 import Producteurs from '../components/Producteurs';
 import CallToAction from '../components/CallToAction';
 import Footer from '../components/Footer';
+import Hero from '../components/Hero';
 
-const HomeConnect: React.FC = () => {
+const HomeAdmin: React.FC = () => {
   return (
     <>
-      <HeaderConnect />
+      <HeaderAdmin />
       <Hero/>
       <TeaAndCoffeeSection />
       <InfoSection />
@@ -23,4 +23,4 @@ const HomeConnect: React.FC = () => {
   );
 };
 
-export default HomeConnect;
+export default HomeAdmin;

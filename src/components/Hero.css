@@ -1,47 +1,46 @@
 .hero {
-    background-image: url(../../public/cafe.jpg);
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .hero-text {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2rem;
-    color: white;
-    margin-bottom: 0.5rem;
-  }
-  
-  .hero-title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 4rem;
-    font-weight: bold;
-    color: white;
-    margin-bottom: 1rem;
-  }
-  
-  .hero-subtitle {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.25rem;
-    color: white;
-    margin-bottom: 2rem;
-  }
+  background-image: url(../../public/cafe.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 
-  .login-button:hover {
-    background-color: #8B4513;
-    border-color: #8B4513;
-  }
+.hero-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 0.5rem;
+}
 
-  .hero-buttons {
-    display: flex;
-    gap: 1rem;
-  }
-  
-  
-  
-  
+.hero-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 4rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.25rem;
+  color: white;
+  margin-bottom: 2rem;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.login-button:hover,
+.register-button:hover {
+  background-color: #8B4513;
+  border-color: #8B4513;
+}
