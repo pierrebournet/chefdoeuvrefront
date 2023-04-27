@@ -4,20 +4,20 @@ import AuthContext from '../contexts/AuthContext';
 
 interface AuthWrapperProps {
   adminRoute?: boolean;
-  children?: React.ReactNode;
+  children: React.ReactNode;
 }
 
 const AuthWrapper: React.FC<AuthWrapperProps> = ({ adminRoute, children }) => {
-  const { isAuthenticated, isAdmin } = useContext(AuthContext);
+  const { isLoggedIn, isAdmin } = useContext(AuthContext);
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    if (!isAuthenticated) {
+    if (adminRoute && !isLoggedIn) {
       navigate('/login');
     } else if (adminRoute && !isAdmin) {
       navigate('/connect');
     }
-  }, [isAuthenticated, isAdmin, navigate, adminRoute]);
+  }, [adminRoute, isLoggedIn, isAdmin, navigate]);
 
   return <>{children}</>;
 };

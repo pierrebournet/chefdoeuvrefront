@@ -4,7 +4,7 @@ import { Form, Button } from 'react-bootstrap';
 import AuthContext from '../contexts/AuthContext';
 import './LoginPage.css';
 
-const LoginPage: React.FC = () => {
+const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -29,13 +29,12 @@ const LoginPage: React.FC = () => {
 
         console.log(data);
         ;
-        setAuthContextData(true, data.isAdmin, data);
-
+        setAuthContextData(true, data.isAdmin, data, data.access_token); // Ajout du token ici
 
         if (data.isAdmin) {
-          navigate('/admin'); 
+          navigate('/admin');
         } else {
-          navigate('/connect'); // Redirigez l'utilisateur vers la page HomeConnect
+          navigate('/connect'); // Rediriger l'utilisateur vers la page HomeConnect
         }
       } else {
         console.error('Erreur lors de la connexion:', response);
@@ -49,7 +48,6 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    
     <div className="loginpage-container" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/images/registerlogin.jpg)` }}>
       <h1 className="loginpage-title">Connexion</h1>
       <Form className="login-container" onSubmit={handleSubmit}>
@@ -78,4 +76,4 @@ const LoginPage: React.FC = () => {
   );
 };
 
-export default LoginPage;
+export default Login;

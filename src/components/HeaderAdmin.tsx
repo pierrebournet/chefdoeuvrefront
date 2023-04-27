@@ -5,11 +5,10 @@ import AuthContext from '../contexts/AuthContext';
 import './HeaderAdmin.css';
 
 const HeaderAdmin: React.FC = () => {
-  const { isAuthenticated, isAdmin, user, setAuthContextData } = useContext(AuthContext);
+  const { isLoggedIn, user, logout } = useContext(AuthContext);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    setAuthContextData(false, false, null);
+    logout();
   };
 
   return (
@@ -30,9 +29,9 @@ const HeaderAdmin: React.FC = () => {
           </Nav.Link>
         </Nav>
         <Nav>
-          {isAuthenticated && isAdmin && (
+          {isLoggedIn && user && user.isAdmin && (
             <>
-              <Nav.Link>{user?.username}</Nav.Link>
+              <Nav.Link>{user.username}</Nav.Link>
               <LinkContainer to="/admin/dashboard">
                 <Button className="headeradmin-dashboard">Dashboard</Button>
               </LinkContainer>

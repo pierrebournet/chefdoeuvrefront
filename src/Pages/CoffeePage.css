@@ -1,0 +1,14 @@
+.coffee-banner {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
+  
+  .coffee-banner {
+    width: 100% !important; /* Prend toute la largeur */
+    height: auto; /* Ajuste automatiquement la hauteur en fonction de la largeur */
+    max-height: 400px; /* Limite la hauteur à 400px */
+    object-fit: cover; /* Redimensionne l'image pour remplir l'espace tout en conservant son aspect */
+  }
+  
