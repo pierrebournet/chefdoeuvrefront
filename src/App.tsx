@@ -13,23 +13,26 @@ import DashboardPage from './Pages/DashboardPage';
 import AuthWrapper from './components/AuthWrapper';
 import CoffeePage from './Pages/CoffeePage';
 import './App.css';
-import { AuthProvider } from './contexts/AuthContext'; // Correction ici
+import { AuthProvider } from './contexts/AuthContext';
+import { ProductContextProvider } from './contexts/ProductContext';
 
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/admin/dashboard" element={<DashboardPage />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} /> // Correction ici
-          <Route path="/register" element={<Register />} /> // Correction ici
-          <Route path="/admin" element={<AuthWrapper><HomeAdmin /></AuthWrapper>} />
-          <Route path="/dashboard" element={<AuthWrapper adminRoute><DashboardPage /></AuthWrapper>} />
-          <Route path="/connect" element={<AuthWrapper><HomeConnect /></AuthWrapper>} />
-          <Route path="/coffee" element={<CoffeePage />} />
-        </Routes>
-      </Router>
+      <ProductContextProvider>
+        <Router>
+          <Routes>
+            <Route path="/admin/dashboard" element={<DashboardPage />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/admin" element={<AuthWrapper><HomeAdmin /></AuthWrapper>} />
+            <Route path="/dashboard" element={<AuthWrapper adminRoute><DashboardPage /></AuthWrapper>} />
+            <Route path="/connect" element={<AuthWrapper><HomeConnect /></AuthWrapper>} />
+            <Route path="/coffee" element={<CoffeePage />} />
+          </Routes>
+        </Router>
+      </ProductContextProvider>
     </AuthProvider>
   );
 }

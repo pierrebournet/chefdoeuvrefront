@@ -1,3 +1,4 @@
+import { Category } from "./categories";
 export interface Product {
     id: number;
     name: string;
@@ -8,8 +9,5 @@ export interface Product {
     imageHoverUrl: string;
   }
   
-  export interface Category {
-    id: number;
-    name: string;
-  }
+  
   

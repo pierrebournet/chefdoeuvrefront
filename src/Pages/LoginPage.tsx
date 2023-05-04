@@ -28,7 +28,7 @@ const Login: React.FC = () => {
         localStorage.setItem('token', data.access_token);
 
         console.log(data);
-        ;
+        
         setAuthContextData(true, data.isAdmin, data, data.access_token); // Ajout du token ici
 
         if (data.isAdmin) {
