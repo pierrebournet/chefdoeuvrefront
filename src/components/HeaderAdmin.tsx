@@ -1,3 +1,5 @@
+// HeaderAdmin.tsx
+
 import React, { useContext } from 'react';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -19,10 +21,18 @@ const HeaderAdmin: React.FC = () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mx-auto">
-          <Nav.Link className="nav-item-custom" href="#cafe">Café</Nav.Link>
-          <Nav.Link className="nav-item-custom" href="#the">Thé</Nav.Link>
-          <Nav.Link className="nav-item-custom" href="#bubble-tea">Bubble Tea</Nav.Link>
-          <Nav.Link className="nav-item-custom" href="#shake">Shake</Nav.Link>
+          <LinkContainer to="/coffee">
+            <Nav.Link className="nav-item-custom">Café</Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/the">
+            <Nav.Link className="nav-item-custom">Thé</Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/bubble-tea">
+            <Nav.Link className="nav-item-custom">Bubble Tea</Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/shaker">
+            <Nav.Link className="nav-item-custom">Shake</Nav.Link>
+          </LinkContainer>
           <Nav.Link className="nav-item-custom" href="#contact">Contact</Nav.Link>
           <Nav.Link href="#home" className="nav-item-custom">
             Accueil
