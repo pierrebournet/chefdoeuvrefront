@@ -1,16 +1,20 @@
 import React, { useContext } from 'react';
-import { Navbar, Nav, Button } from 'react-bootstrap';
+import { Navbar, Nav, Button, Badge, Dropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import AuthContext from '../contexts/AuthContext';
-import './HeaderConnect.css'
+import { useCartContext } from '../contexts/CartContext';
+import './HeaderConnect.css';
 import { LinkContainer } from 'react-router-bootstrap';
 
 const HeaderConnect: React.FC = () => {
   const { isLoggedIn, user, login, logout } = useContext(AuthContext);
+  const { cartItems, removeItem } = useCartContext();
 
   const handleLogout = () => {
     logout();
   };
+
+  const totalItemsInCart = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <Navbar expand="lg" style={{ backgroundColor: '#C4C4C4' }}>
@@ -36,9 +40,32 @@ const HeaderConnect: React.FC = () => {
             </Nav.Link>
           )}
           {isLoggedIn && (
-            <Nav.Link as={Link} to="/cart" className="nav-item-custom">
-              Panier
-            </Nav.Link>
+            <Dropdown as="div" className="nav-item-custom">
+            <Dropdown.Toggle variant="outline-dark" id="dropdown-cart">
+              Panier <Badge bg="primary">{totalItemsInCart}</Badge>
+            </Dropdown.Toggle>
+          
+            <Dropdown.Menu style="align: right">
+              {cartItems.length > 0 ? (
+                cartItems.map((item) => (
+                  <Dropdown.Item key={item.product.id}>
+                    {item.product.name} - x{item.quantity}
+                    <button
+                      className="btn btn-danger btn-sm ml-2"
+                      onClick={() => removeItem(item.product.id)}
+                    >
+                      X
+                    </button>
+                  </Dropdown.Item>
+                ))
+              ) : (
+                <Dropdown.Item>Panier vide</Dropdown.Item>
+              )}
+              <Dropdown.Divider />
+              <Dropdown.Item as={Link} to="/cart">Voir le panier</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+          
           )}
         </Nav>
         {isLoggedIn ? (
