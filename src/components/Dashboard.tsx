@@ -5,6 +5,7 @@ import { Product } from '../types/Product';
 import AuthContext from '../contexts/AuthContext';
 import { useProductContext } from '../contexts/ProductContext';
 import { Category, categories } from '../types/categories'
+import { createUpdateProduct, fetchProducts } from '../services/Product.service';
 
 export const Dashboard: React.FC = () => {
   const { products, setProducts } = useProductContext();
@@ -22,21 +23,14 @@ export const Dashboard: React.FC = () => {
   const [imageHoverUrl, setImageHoverUrl] = useState<string>('');
   const [loading, setLoading] = useState(false);
 
-  const fetchProducts = async () => {
-    const response = await fetch('http://localhost:3000/products', {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-      },
-    });
-    const data = await response.json();
-    setProducts(data);
-  };
+  
+
 
   useEffect(() => {
     if (user && token) {
       setLoading(true);
-      fetchProducts();
+      const data = fetchProducts();
+      setProducts(data)
       console.log(products);
     }
   }, [loading]);
@@ -58,17 +52,7 @@ export const Dashboard: React.FC = () => {
   
     if (user && token) {
       try {
-        const response = await fetch(
-          `http://localhost:3000/products${editingProduct ? `/${editingProduct.id}` : ''}`,
-          {
-            method: editingProduct ? 'PUT' : 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`,
-            },
-            body: JSON.stringify(newProduct),
-          }
-        );
+        const response = await createUpdateProduct(newProduct, editingProduct)
   
         if (!response.ok) {
           const errorData = await response.json();

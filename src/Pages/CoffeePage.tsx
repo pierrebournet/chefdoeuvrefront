@@ -5,16 +5,17 @@ import { Product } from '../types/Product';
 import ProductCard from '../components/ProductCard';
 import { Container, Row } from 'react-bootstrap';
 import { useProductContext } from '../contexts/ProductContext';
-import { categories } from '../types/categories';
 import Header from '../components/Header';
 import HeaderConnect from '../components/HeaderConnect';
 import './CoffeePage.css';
+import { fetchCategories } from '../services/Category.service';
 
 const CoffeePage: React.FC = () => {
   const { products } = useProductContext();
   console.log(products);
 
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState(); 
 
   // Remplacez cette ligne par la logique appropriée pour vérifier si l'utilisateur est connecté
   const userIsConnected = false;
@@ -23,7 +24,9 @@ const CoffeePage: React.FC = () => {
 console.log('Products:', products);
 
 useEffect(() => {
-  const cafeCategory = categories.find(category => category.name === 'Café')?.id;
+  const getCategories = async()=> { setCategories(await fetchCategories())}
+  getCategories() 
+  const cafeCategory = categories?.find(category => category.name === 'Café')?.id;
   console.log('Café category ID:', cafeCategory);
   
   if (cafeCategory) {
