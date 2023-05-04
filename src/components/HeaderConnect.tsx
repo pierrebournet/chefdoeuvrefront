@@ -45,7 +45,7 @@ const HeaderConnect: React.FC = () => {
               Panier <Badge bg="primary">{totalItemsInCart}</Badge>
             </Dropdown.Toggle>
           
-            <Dropdown.Menu style="align: right">
+            <Dropdown.Menu className= "Header-connect-align">
               {cartItems.length > 0 ? (
                 cartItems.map((item) => (
                   <Dropdown.Item key={item.product.id}>

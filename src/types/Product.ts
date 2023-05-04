@@ -8,6 +8,15 @@ export interface Product {
     imageUrl: string;
     imageHoverUrl: string;
   }
+
+  export interface NewProduct {
+    name: string;
+    description: string;
+    price: number;
+    categoryId: number;
+    imageUrl: string;
+    imageHoverUrl: string;
+  }
   
   
   
