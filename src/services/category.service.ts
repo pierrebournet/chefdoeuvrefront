@@ -1,10 +1,6 @@
-import { useContext } from "react";
-import AuthContext from "../contexts/AuthContext";
-
-const { user, token } = useContext(AuthContext);
-
-export const fetchCategories = async () => {
-    const response = await fetch('http://localhost:3000/categories', {
+export async function fetchCategories (token?: string) {
+  console.log('fetch categories')
+    const response = await fetch('http://localhost:3000/category', {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,

@@ -10,12 +10,13 @@ export interface Product {
   }
 
   export interface NewProduct {
-    name: string;
-    description: string;
-    price: number;
-    categoryId: number;
-    imageUrl: string;
-    imageHoverUrl: string;
+    id?: number
+    name?: string;
+    description?: string;
+    price?: number;
+    categoryId?: number;
+    imageUrl?: string;
+    imageHoverUrl?: string;
   }
   
   

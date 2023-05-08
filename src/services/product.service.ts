@@ -1,9 +1,6 @@
-import { useContext } from "react";
-import AuthContext from "../contexts/AuthContext";
 import { NewProduct, Product } from "../types/Product";
 
-const { user, token } = useContext(AuthContext);
-export async function createUpdateProduct(newProduct:NewProduct,editingProduct:Product){
+export async function createUpdateProduct(newProduct:NewProduct, token?: string ,editingProduct?:Product){
     const response = await fetch(
         `http://localhost:3000/products${editingProduct ? `/${editingProduct.id}` : ''}`,
         {
@@ -20,7 +17,7 @@ export async function createUpdateProduct(newProduct:NewProduct,editingProduct:P
 }
 
 
-export const fetchProducts = async () => {
+ export const fetchProducts = async (token?: string) => {
     const response = await fetch('http://localhost:3000/products', {
       headers: {
         'Content-Type': 'application/json',
@@ -30,3 +27,15 @@ export const fetchProducts = async () => {
     const data = await response.json();
     return data;
   };
+
+export const deleteProduct= async (productId : number, token?: string) => {
+  const response = await fetch(`http://localhost:3000/products/${productId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+  return response;
+
+}

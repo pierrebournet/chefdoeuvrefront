@@ -2,24 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { Product } from '../types/Product';
 import { Container, Row } from 'react-bootstrap';
 import { useProductContext } from '../contexts/ProductContext';
-import { categories } from '../types/categories';
+import { fetchCategories } from '../services/category.service';
 import Header from '../components/Header';
 import HeaderConnect from '../components/HeaderConnect';
 import './ShakerPage.css';
+import { Category } from '../types/categories';
 
 const ShakerPage: React.FC = () => {
   const { products } = useProductContext();
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]); 
   const userIsConnected = false;
 
   useEffect(() => {
+    const getCategories = async()=> { setCategories(await fetchCategories())}
+    getCategories() 
     const shakerCategory = categories.find(category => category.name === 'Shaker')?.id;
     
     if (shakerCategory) {
       const filtered = products.filter(product => Number(product.categoryId) === shakerCategory);
       setFilteredProducts(filtered);
     }
-  }, [products]);
+  }, [products, categories]);
 
   return (
     <>

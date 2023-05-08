@@ -4,70 +4,60 @@ import { Link } from 'react-router-dom';
 import { Product } from '../types/Product';
 import AuthContext from '../contexts/AuthContext';
 import { useProductContext } from '../contexts/ProductContext';
-import { Category, categories } from '../types/categories'
-import { createUpdateProduct, fetchProducts } from '../services/Product.service';
-
+import { Category } from '../types/categories'
+import { createUpdateProduct, fetchProducts, deleteProduct } from '../services/product.service';
+import { fetchCategories } from '../services/category.service';
+import { useCategoryContext } from '../contexts/CategoryContext';
 export const Dashboard: React.FC = () => {
   const { products, setProducts } = useProductContext();
+  const { categories, setCategories } = useCategoryContext();
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const { user, token } = useContext(AuthContext);
 
   // Ajout des variables d'état pour les champs du formulaire
-  const [id, setId] = useState<number | string>('');
+  const [id, setId] = useState<number | null>();
   const [name, setName] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [price, setPrice] = useState<number>(0);
-  const [categoryId, setCategoryId] = useState<number| null>(0);
-  const [fetchedCategories, setFetchedCategories] = useState<Category[]>([]);
+  const [categoryId, setCategoryId] = useState<number| null>(1);
   const [imageUrl, setImageUrl] = useState<string>('');
   const [imageHoverUrl, setImageHoverUrl] = useState<string>('');
   const [loading, setLoading] = useState(false);
-
-  
-
-
   useEffect(() => {
-    if (user && token) {
-      setLoading(true);
-      const data = fetchProducts();
-      setProducts(data)
-      console.log(products);
-    }
-  }, [loading]);
+
+  }, [])
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
   
-    const newProduct = {
-      ...(editingProduct ? { id: id } : {}),
+    let newProduct = {
       name: name,
       description: description,
       price: price,
-      categoryId: categoryId,
+      categoryId: categoryId?? undefined,
       imageUrl: imageUrl,
       imageHoverUrl: imageHoverUrl,
     };
-  
+    
     console.log(newProduct);
+    try {
+      console.log('createProduct')
+      const response = await createUpdateProduct(newProduct,token?? undefined, editingProduct ?? undefined)
   
-    if (user && token) {
-      try {
-        const response = await createUpdateProduct(newProduct, editingProduct)
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.log('Error data:', errorData);
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
   
-        if (!response.ok) {
-          const errorData = await response.json();
-          console.log('Error data:', errorData);
-          throw new Error(`Error: ${response.status} ${response.statusText}`);
-        }
-  
-        const savedProduct = await response.json();
-        setLoading(true);
-        if (editingProduct) {
-          setProducts(
-            products.map((product) =>
-              product.id === savedProduct.id ? savedProduct : product
-            )
-          );
+      const savedProduct = await response.json();
+      setLoading(true);
+      if (editingProduct) {
+        setProducts(
+          products.map((product) =>
+            product.id === savedProduct.id ? savedProduct : product
+          )
+        );
         } else {
           // Ajoutez cette ligne pour mettre à jour l'état des produits
           setProducts([...products, savedProduct]);
@@ -77,34 +67,14 @@ export const Dashboard: React.FC = () => {
       } catch (error) {
         console.error('Error in handleSubmit:', error);
       }
-    }
   };
   
-  
-  const fetchCategories = async () => {
-    const response = await fetch('http://localhost:3000/categories', {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-      },
-    });
-    const data = await response.json();
-    setFetchedCategories(data);
-  };
-
-  useEffect(() => {
-    if (user && token) {
-      setLoading(true);
-      fetchProducts();
-      fetchCategories();
-    }
-  }, [user, token]);
   
   const handleUpdate = async (productId: number) => {
     const productToUpdate = products.find((product) => product.id === productId);
     if (productToUpdate) {
       setEditingProduct(productToUpdate);
-      setId(productToUpdate.id.toString());
+      setId(productToUpdate.id);
       setName(productToUpdate.name);
       setDescription(productToUpdate.description);
       setPrice(productToUpdate.price);
@@ -115,34 +85,27 @@ export const Dashboard: React.FC = () => {
   };
   
   const handleDelete = async (productId: number) => {
-    if (user && token) {
-      try {
-        const response = await fetch(`http://localhost:3000/products/${productId}`, {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-        });
-  
-        if (!response.ok) {
-          const errorData = await response.json();
-          console.log('Error data:', errorData);
-          throw new Error(`Error: ${response.status} ${response.statusText}`);
-        }
-  
-        fetchProducts();
-        setLoading(true);
-      } catch (error) {
-        console.error('Error in handleDelete:', error);
+    try {
+      const response = await deleteProduct(productId, token?? undefined);
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.log('Error data:', errorData);
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
       }
+  
+      const fetchedProducts = await fetchProducts(token?? undefined);
+      setProducts(fetchedProducts)
+      setLoading(true);
+    } catch (error) {
+      console.error('Error in handleDelete:', error);
     }
+
   };
   
   
   
   const clearForm = () => {
-    setId('');
+    setId(null);
     setName('');
     setDescription('');
     setPrice(0);
@@ -161,7 +124,7 @@ export const Dashboard: React.FC = () => {
             {editingProduct && (
               <Form.Group>
                 <Form.Label>ID</Form.Label>
-                <Form.Control type="text" name="id" value={id} readOnly />
+                <Form.Control type="text" name="id" value={id ?? undefined} readOnly />
 
               </Form.Group>
             )}
@@ -205,7 +168,7 @@ export const Dashboard: React.FC = () => {
                 onChange={(e) => setCategoryId(Number(e.target.value))}
                 required
               >
-                {categories.map((category) => (
+                {categories.map((category: Category) => (
                   <option key={category?.id} value={category?.id}>
                     {category?.name}
                   </option>
@@ -265,7 +228,7 @@ export const Dashboard: React.FC = () => {
                   <td>{product.name}</td>
                   <td>{product.description}</td>
                   <td>{typeof product.price === 'number' ? product.price.toFixed(2) : product.price}</td>
-                <td>{categories.filter((category)=>category.id===product.categoryId)[0]?.name}</td>
+                <td>{categories.filter((category: Category)=>category.id===product.categoryId)[0]?.name}</td>
                 <td>
                   {product.imageUrl && (
                     <a href={product.imageUrl} target="_blank" rel="noreferrer">

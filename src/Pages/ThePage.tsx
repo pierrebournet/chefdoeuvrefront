@@ -2,24 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { Product } from '../types/Product';
 import { Container, Row } from 'react-bootstrap';
 import { useProductContext } from '../contexts/ProductContext';
-import { categories } from '../types/categories';
 import Header from '../components/Header';
 import HeaderConnect from '../components/HeaderConnect';
 import './ThePage.css';
+import { Category } from '../types/categories'
+import { fetchCategories } from '../services/category.service';
 
 const ThePage: React.FC = () => {
   const { products } = useProductContext();
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const userIsConnected = false;
 
   useEffect(() => {
+    const getCategories = async()=> { setCategories(await fetchCategories())}
+    getCategories() 
     const theCategory = categories.find(category => category.name === 'Thé')?.id;
     
     if (theCategory) {
       const filtered = products.filter(product => Number(product.categoryId) === theCategory);
       setFilteredProducts(filtered);
     }
-  }, [products]);
+  }, [products, categories]);
 
   return (
     <>

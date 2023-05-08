@@ -20,26 +20,29 @@ import ShakerPage from './Pages/ShakerPage';
 import './App.css';
 import { AuthProvider } from './contexts/AuthContext';
 import { ProductContextProvider } from './contexts/ProductContext';
+import { CategoryContextProvider } from './contexts/CategoryContext';
 
 function App() {
   return (
     <AuthProvider>
       <ProductContextProvider>
-        <Router>
-          <Routes>
-            <Route path="/admin/dashboard" element={<DashboardPage />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/admin" element={<AuthWrapper><HomeAdmin /></AuthWrapper>} />
-            <Route path="/dashboard" element={<AuthWrapper adminRoute><DashboardPage /></AuthWrapper>} />
-            <Route path="/connect" element={<AuthWrapper><HomeConnect /></AuthWrapper>} />
-            <Route path="/coffee" element={<CoffeePage />} />
-            <Route path="/the" element={<ThePage />} />
-            <Route path="/bubble-tea" element={<BubbleTeaPage />} />
-            <Route path="/shaker" element={<ShakerPage />} />
-          </Routes>
-        </Router>
+        <CategoryContextProvider>
+          <Router>
+            <Routes>
+              <Route path="/admin/dashboard" element={<DashboardPage />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/admin" element={<AuthWrapper><HomeAdmin /></AuthWrapper>} />
+              <Route path="/dashboard" element={<AuthWrapper adminRoute><DashboardPage /></AuthWrapper>} />
+              <Route path="/connect" element={<AuthWrapper><HomeConnect /></AuthWrapper>} />
+              <Route path="/coffee" element={<CoffeePage />} />
+              <Route path="/the" element={<ThePage />} />
+              <Route path="/bubble-tea" element={<BubbleTeaPage />} />
+              <Route path="/shaker" element={<ShakerPage />} />
+            </Routes>
+          </Router>
+        </CategoryContextProvider>
       </ProductContextProvider>
     </AuthProvider>
   );
