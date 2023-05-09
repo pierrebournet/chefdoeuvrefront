@@ -1,9 +1,7 @@
-// Pages/CoffeePage.tsx
-
 import React, { useEffect, useState } from 'react';
 import { Product } from '../types/Product';
 import { Category } from '../types/categories';
-import ProductCard from '../components/ProductCard'; // <ProductCard product={product} ></ProductCard>
+import ProductCard from '../components/ProductCard';
 import { Container, Row } from 'react-bootstrap';
 import { useProductContext } from '../contexts/ProductContext';
 import Header from '../components/Header';
@@ -13,30 +11,25 @@ import { fetchCategories } from '../services/category.service';
 
 const CoffeePage: React.FC = () => {
   const { products } = useProductContext();
-  console.log(products);
 
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]); 
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [userIsConnected, setUserIsConnected] = useState(false);
 
-  // Remplacez cette ligne par la logique appropriée pour vérifier si l'utilisateur est connecté
-  const userIsConnected = false;
+  useEffect(() => {
+    const getCategories = async () => {
+      setCategories(await fetchCategories());
+    };
+    getCategories();
+  }, []);
 
-  console.log('Categories:', categories);
-console.log('Products:', products);
-
-useEffect(() => {
-  const getCategories = async()=> { setCategories(await fetchCategories())}
-  getCategories() 
-  const cafeCategory = categories?.find(category => category.name === 'Café')?.id;
-  console.log('Café category ID:', cafeCategory);
-  
-  if (cafeCategory) {
-    const filtered = products.filter(product => Number(product.categoryId) === cafeCategory);
-    console.log('Filtered products:', filtered);
-    setFilteredProducts(filtered);
-  }
-}, [products, categories]);
-
+  useEffect(() => {
+    const cafeCategory = categories.find((category) => category.name === 'Café')?.id;
+    if (cafeCategory) {
+      const filtered = products.filter((product) => Number(product.categoryId) === cafeCategory);
+      setFilteredProducts(filtered);
+    }
+  }, [categories, products]);
 
   return (
     <>
@@ -47,16 +40,9 @@ useEffect(() => {
         </Row>
         <Row>
           <div className="product-cards">
-            
-          {filteredProducts.map(product => (
-  <div key={product.id}>
-    <h3>{product.name}</h3>
-    <p>{product.description}</p>
-    <p>{product.price}</p>
-  </div>
-))}
-
-
+            {filteredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
           </div>
         </Row>
       </Container>

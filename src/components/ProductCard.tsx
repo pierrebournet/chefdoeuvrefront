@@ -1,5 +1,5 @@
-import React from 'react';
-import { Card, Col } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Card, Button } from 'react-bootstrap';
 import './ProductCard.css';
 import { useCartContext } from '../contexts/CartContext';
 import { Product } from '../types/Product';
@@ -9,40 +9,43 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const [hover, setHover] = React.useState(false);
   const { addToCart } = useCartContext();
 
-  const handleMouseEnter = () => {
-    setHover(true);
-  };
-
-  const handleMouseLeave = () => {
-    setHover(false);
-  };
+  const [showMore, setShowMore] = useState(false);
+  const truncatedDescription = product.description.slice(0, 60) + "...";
 
   const handleAddToCart = () => {
     addToCart(product);
   };
 
+  const toggleShowMore = () => {
+    setShowMore(!showMore);
+  };
+
   return (
-    <Col xs={12} sm={6} md={4} lg={3}>
-      <Card
-        className="product-card"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onClick={handleAddToCart}
-      >
-        <Card.Img
-          variant="top"
-          src={hover ? product.imageHoverUrl : product.imageUrl}
-          alt={product.name}
-        />
-        <Card.Body>
-          <Card.Title>{product.name}</Card.Title>
-          <Card.Text>{`$${product.price}`}</Card.Text>
-        </Card.Body>
-      </Card>
-    </Col>
+    <Card className={`product-card ${showMore ? 'expanded' : ''}`}> {/* Ligne modifiée */}
+      <Card.Img className="the-banner" variant="top" src={product.imageUrl} alt={product.name} />
+      <Card.Body style={{ backgroundColor: "#F5F5F5", boxShadow: "5px 5px rgba(0, 0, 0, 0.1)" }}>
+        <div className="d-flex product-name-price">
+          <h5 style={{ color: "orange" }}>{product.name}</h5>
+          <p className="text-orange">{`$${product.price}`}</p>
+        </div>
+        <p className={`product-description ${showMore ? '' : 'truncate'}`}>
+          {showMore ? product.description : truncatedDescription}
+        </p>
+        <div className="read-more-button-container">
+          <button onClick={toggleShowMore} className="read-more-button">
+            {showMore ? "Lire moins" : "Lire la suite"}
+          </button>
+        </div>
+        <Button 
+          variant="coffee" 
+          onClick={handleAddToCart} 
+          style={{ color: "white", backgroundColor: "#4C2F27", borderColor: "#4C2F27", marginTop: "20px" }}>
+          Ajouter au panier
+        </Button>
+      </Card.Body>
+    </Card>
   );
 };
 

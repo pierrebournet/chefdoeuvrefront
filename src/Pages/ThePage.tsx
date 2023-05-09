@@ -4,21 +4,19 @@ import { Container, Row } from 'react-bootstrap';
 import { useProductContext } from '../contexts/ProductContext';
 import Header from '../components/Header';
 import HeaderConnect from '../components/HeaderConnect';
+import { useCategoryContext } from '../contexts/CategoryContext';
+import ProductCard from '../components/ProductCard';
 import './ThePage.css';
-import { Category } from '../types/categories'
-import { fetchCategories } from '../services/category.service';
 
 const ThePage: React.FC = () => {
   const { products } = useProductContext();
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
+  const { categories } = useCategoryContext();
   const userIsConnected = false;
 
   useEffect(() => {
-    const getCategories = async()=> { setCategories(await fetchCategories())}
-    getCategories() 
     const theCategory = categories.find(category => category.name === 'Thé')?.id;
-    
+
     if (theCategory) {
       const filtered = products.filter(product => Number(product.categoryId) === theCategory);
       setFilteredProducts(filtered);
@@ -30,16 +28,12 @@ const ThePage: React.FC = () => {
       {userIsConnected ? <HeaderConnect /> : <Header />}
       <Container>
         <Row>
-          <img src="/images/ilovethe.jpg" alt="I Love Thé" className="the-banner" />
+          <img src="/images/ilovecafe.jpg" alt="I Love Thé" className="the-banner" />
         </Row>
         <Row>
-          <div className="product-cards">
+          <div className="product-cards"> {/* Ligne modifiée */}
             {filteredProducts.map(product => (
-              <div key={product.id}>
-                <h3>{product.name}</h3>
-                <p>{product.description}</p>
-                <p>{product.price}</p>
-              </div>
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </Row>

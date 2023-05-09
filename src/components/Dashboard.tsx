@@ -36,12 +36,13 @@ export const Dashboard: React.FC = () => {
       price: price,
       categoryId: categoryId?? undefined,
       imageUrl: imageUrl,
-      imageHoverUrl: imageHoverUrl,
+      //imageHoverUrl: imageHoverUrl,
     };
     
     console.log(newProduct);
     try {
-      console.log('createProduct')
+      console.log('newproduct',newProduct)
+      console.log('editingProduct',editingProduct)
       const response = await createUpdateProduct(newProduct,token?? undefined, editingProduct ?? undefined)
   
       if (!response.ok) {
@@ -59,7 +60,6 @@ export const Dashboard: React.FC = () => {
           )
         );
         } else {
-          // Ajoutez cette ligne pour mettre à jour l'état des produits
           setProducts([...products, savedProduct]);
         }
   
@@ -109,9 +109,8 @@ export const Dashboard: React.FC = () => {
     setName('');
     setDescription('');
     setPrice(0);
-    setCategoryId(null);
     setImageUrl('');
-    setImageHoverUrl('');
+    //setImageHoverUrl('');
     setEditingProduct(null);
   };
   
@@ -153,6 +152,7 @@ export const Dashboard: React.FC = () => {
               <Form.Control
                 type="number"
                 step="0.01"
+                min="0"
                 name="price"
                 value={price}
                 onChange={(e) => setPrice(parseFloat(e.target.value))}
@@ -184,17 +184,7 @@ export const Dashboard: React.FC = () => {
                 onChange={(e) => setImageUrl(e.target.value)}
                 required
               />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>URL de l'image au survol</Form.Label>
-              <Form.Control
-                type="text"
-                name="imageHoverUrl"
-                value={imageHoverUrl}
-                onChange={(e) => setImageHoverUrl(e.target.value)}
-                required
-              />
-            </Form.Group>
+          </Form.Group> 
             <Button variant="primary" type="submit">
               {editingProduct ? 'Mettre à jour' : 'Créer'}
             </Button>
