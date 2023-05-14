@@ -1,9 +1,3 @@
-.logo {
-  font-family: 'Lobster', cursive;
-  font-size: 1.8rem;
-  margin-left: 1rem;
-}
-
 .nav-item-custom {
   font-family: 'Montserrat', sans-serif;
   font-size: 1.1rem;
@@ -34,3 +28,16 @@
 .nav {
   align-items: center;
 }
+
+.logo img {
+  width: 60px !important;
+  height: auto;
+}
+
+.navbar-custom {
+  background-color: #C4C4C4 !important;
+}
+
+
+
+

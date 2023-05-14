@@ -1,5 +1,5 @@
 .headerconnect {
-  background-color: #C4C4C4;
+  background-color: #C4C4C4 !important;
 }
   
   .headerconnect-logout {
@@ -16,5 +16,10 @@
 
   .Header-connect-align {
     align-items: right;
+  }
+  
+  .logo img {
+    width: 60px;
+    height: auto;
   }
   

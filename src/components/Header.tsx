@@ -1,5 +1,3 @@
-// Header.tsx
-
 import React, { useContext } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -13,7 +11,7 @@ const Header: React.FC = () => {
   return (
     <Navbar bg="light" expand="lg" style={{ backgroundColor: '#C4C4C4' }}>
       <Navbar.Brand href="#home" className="logo">
-        Logo
+      <img src="/images/logocafe.png" alt="Logo" className="logo" />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">

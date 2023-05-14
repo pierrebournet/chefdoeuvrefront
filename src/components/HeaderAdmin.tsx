@@ -15,8 +15,8 @@ const HeaderAdmin: React.FC = () => {
 
   return (
     <Navbar bg="light" expand="lg" style={{ backgroundColor: '#C4C4C4' }}>
-      <Navbar.Brand href="#home" className="logo">
-        Logo
+     <Navbar.Brand href="#home" className="logo">
+      <img src="/images/logocafe.png" alt="Logo" className="logo" />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
