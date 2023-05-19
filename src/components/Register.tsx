@@ -39,6 +39,8 @@ const Register: React.FC = () => {
   };
 
   return (
+    <div className="loginpage-container" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/images/registerlogin.jpg)` }}>
+      
     <Form className="register-container" onSubmit={handleSubmit}>
       <Form.Group>
         <Form.Label>Nom d'utilisateur</Form.Label>
@@ -67,6 +69,7 @@ const Register: React.FC = () => {
       </Form.Group>
       <Button className="register-button" type="submit">S'inscrire</Button>
     </Form>
+    </div>
   );
 };
 

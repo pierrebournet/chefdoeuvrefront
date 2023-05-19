@@ -3,7 +3,7 @@ import { Navbar, Nav, Button, Badge, Dropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import AuthContext from '../contexts/AuthContext';
 import { useCartContext } from '../contexts/CartContext';
-import './HeaderConnect.css';
+import './Header.css';
 import { LinkContainer } from 'react-router-bootstrap';
 
 const HeaderConnect: React.FC = () => {
@@ -17,7 +17,7 @@ const HeaderConnect: React.FC = () => {
   const totalItemsInCart = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   return (
-    <Navbar expand="lg" style={{ backgroundColor: '#C4C4C4' }}>
+    <Navbar expand="lg" className='nav-color'>
       <Navbar.Brand href="#home" className="logo">
   <img src="/images/logocafe.png" alt="Logo" className="logo" />
 </Navbar.Brand>

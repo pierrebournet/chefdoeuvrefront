@@ -22,18 +22,8 @@
     border-radius: 8px;
 }
 
-.login-button {
-    background-color: #6B4F33 !important;
-    color: white !important;
-    border: 1;
-    border-color: #6B4F33 !important
-}
 
 .password-form-group {
     margin-bottom: 1rem; /* Ajoutez une marge en bas */
 }
 
-.login-button,
-.register-button {
-    margin-top: 1rem; /* Ajoutez une marge en haut */
-}

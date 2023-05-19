@@ -8,21 +8,18 @@
 .nav-item-custom:hover {
   color: #8B4513 !important;
 }
-
-.register-button,
-.login-button {
+.nav-button {
   margin-left: 0.5rem;
-  margin-right: 0.5rem;
-  border-radius: 5px;
-}
-
-.login-button {
   margin-right: 1rem;
+  border-radius: 5px;
+  background-color: #8B4513 !important;
+  color: white !important;
 }
 
-.login-button:hover { 
-  background-color: white;
-  color: #8B4513;
+
+.nav-button:hover { 
+  background-color: white !important;
+  color: #8B4513 !important;
 }
 
 .nav {

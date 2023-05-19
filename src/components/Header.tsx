@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import './Header.css';
+//import './Header.css';
 import AuthContext from '../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ const Header: React.FC = () => {
   const { isLoggedIn, user } = useContext(AuthContext);
 
   return (
-    <Navbar bg="light" expand="lg" style={{ backgroundColor: '#C4C4C4' }}>
+    <Navbar expand="lg" className='nav-color'>
       <Navbar.Brand href="#home" className="logo">
       <img src="/images/logocafe.png" alt="Logo" className="logo" />
       </Navbar.Brand>
@@ -39,12 +39,12 @@ const Header: React.FC = () => {
           ) : (
             <>
               <LinkContainer to="/register">
-                <Nav.Link className="register-button">
+                <Nav.Link className="nav-button">
                   S'enregistrer
                 </Nav.Link>
               </LinkContainer>
               <LinkContainer to="/login">
-                <Nav.Link className="login-button">
+                <Nav.Link className="nav-button">
                   Login
                 </Nav.Link>
               </LinkContainer>

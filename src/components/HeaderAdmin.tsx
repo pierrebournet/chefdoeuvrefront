@@ -4,7 +4,7 @@ import React, { useContext } from 'react';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import AuthContext from '../contexts/AuthContext';
-import './HeaderAdmin.css';
+import './Header.css';
 
 const HeaderAdmin: React.FC = () => {
   const { isLoggedIn, user, logout } = useContext(AuthContext);
@@ -14,7 +14,7 @@ const HeaderAdmin: React.FC = () => {
   };
 
   return (
-    <Navbar bg="light" expand="lg" style={{ backgroundColor: '#C4C4C4' }}>
+    <Navbar expand="lg" className='nav-color'>
      <Navbar.Brand href="#home" className="logo">
       <img src="/images/logocafe.png" alt="Logo" className="logo" />
       </Navbar.Brand>
